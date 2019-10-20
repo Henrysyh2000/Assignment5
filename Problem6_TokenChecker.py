@@ -35,14 +35,27 @@ def check_tokens(filename):
              False otherwise.
     """
     # To do
-    pass
-
-
-
-
-
-
-
+    stack = ArrayStack()
+    file = open(filename, 'r')
+    content = file.read()
+    file.close()
+    for i in content:
+        if i in "([{":
+            stack.push(i)
+        elif i in ")]}":
+            if stack.is_empty():
+                return False
+            test = stack.top()
+            if i == ')' and test != '(':
+                return False
+            elif i == ']' and test != '[':
+                return False
+            elif i == '}' and test != '{':
+                return False
+            stack.pop()
+    if stack.is_empty():
+        return True
+    return False
 
 ##############TEST CODES#################
 ''' Comment out the test code if you are grading on gradescope.'''

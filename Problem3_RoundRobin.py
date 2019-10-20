@@ -19,7 +19,12 @@ class ArrayQueue:
         Also avoid modifying self._size.
         """
         # To do
-        pass
+        temp = self._data[self._front]
+        self._data[self._front] = None
+        self._front += 1
+        self._front %= len(self._data)
+        loc = (self._front + len(self) - 1) % len(self._data)
+        self._data[loc] = temp
 
     def __len__(self):
         """Return the number of elements in the queue."""

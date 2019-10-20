@@ -40,7 +40,27 @@ def infix_to_postfix(string):
     tokens = string.split(" ")
     precedence = {"+":1, "-":1, "*":2, "/":2, "(":0, ")":0}
     # To do
-    pass
+    res = ''
+    for i in tokens:
+        if i == '(':
+            stack.push(i)
+        elif i == ')':
+            j = stack.pop()
+            while j != '(':
+                res += j + ' '
+                j = stack.pop()
+        elif i.isdigit() or i.isalpha():
+            res += i + ' '
+        elif i in "+-*/":
+            while not stack.is_empty() and precedence[stack.top()] >= precedence[i]:
+                ans = stack.pop()
+                res += ans + ' '
+            while stack.is_empty() or precedence[stack.top()] < precedence[i]:
+                stack.push(i)
+    while not stack.is_empty():
+        j = stack.pop()
+        res += j + ' '
+    return res
 
 
 ##############TEST CODES#################

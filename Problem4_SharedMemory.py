@@ -15,45 +15,76 @@ class SharedMemoryStack():
 
     def pushStack1(self, e):
         """ push element e into stack1 """
-        pass
+        self.stack1_size += 1
+        if self.stack1_size + self.stack2_size > len(self._data):
+            self.stack1_size -= 1
+            return
+        self._data[self.stack1_size - 1] = e
+        
 
     def pushStack2(self, e):
         """ push element e into stack2 """
-        pass
+        self.stack2_size += 1
+        if self.stack1_size + self.stack2_size > len(self._data):
+            self.stack2_size -= 1
+            return
+        self._data[-self.stack2_size] = e
 
     def popStack1(self):
         """ pop and return the value stored at top of the stack1 """
-        pass
+        if self.is_empty1():
+            return "Stack1 is empty!"
+        res = self._data[self.stack1_size - 1]
+        self._data[self.stack1_size - 1] = None
+        self.stack1_size -= 1
+        return res
 
     def popStack2(self):
         """ pop and return the value stored at top of the stack2 """
-        pass
+        if self.is_empty2():
+            return "Stack2 is empty!"
+        res = self._data[-self.stack2_size]
+        self._data[-self.stack2_size] = None
+        self.stack2_size -= 1
+        return res
+
 
     def is_full(self):
         """return True stack1 size + stack2 size == SharedMemoryStack.DEFAULT_CAPACITY"""
-        pass
+        if self.stack1_size + self.stack2_size == len(self._data):
+            return True
+        return False
 
     def is_empty1(self):
         """return True if stack1 is empty"""
-        pass
+        if self.stack1_size == 0:
+            return True
+        return False
 
     def is_empty2(self):
         """return True if stack2 is empty"""
-        pass
+        if self.stack2_size == 0:
+            return True
+        return False
 
     def peekStack1(self):
         """return the value stored at top of stack1"""
-        pass
+        return self._data[self.stack1_size - 1]
 
     def peekStack2(self):
         """return the value stored at top of stack2"""
-        pass
+        return self._data[-self.stack2_size]
 
     def __str__(self):   # Not graded.
         result = []
         result.append("Stack 1: ")
+        for i in range(self.stack1_size):
+            result.append(str(self._data[i]) + ', ')
         # Your code 1 to show stack 1
         result.append("Stack 2: ")
+        for i in range(self.stack2_size):
+            result.append(str(self._data[-i-1]) + ', ')
+        
         # Your code 2 to show stack 2
 
         return "".join(result)

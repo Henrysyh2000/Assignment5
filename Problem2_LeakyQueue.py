@@ -8,22 +8,42 @@ class LeakyQueue():
 
     def enqueue(self, e):  # O(1)
         """ enqueue element e into front of the queue, with leaky features. """
-        pass
+        self._size += 1
+        if self._size > len(self._data):
+            self._size -= 1
+            self._data[self._front] = e
+            self._front += 1
+            self._front %= len(self._data)
+        else:
+            self._data[self._size - 1] = e
+        
 
     def dequeue(self):      # O(1)
         """ dequeue and return the value stored at front of the queue. """
-        pass
+        if self.is_empty():
+            raise Empty
+        res = self._data[self._front]
+        self._data[self._front] = None
+        self._front += 1
+        self._front %= len(self._data)
+        self._size -= 1
+        return res
 
     def __len__(self):  # O(1)
         """ return the current number of elements in the queue. """
-        pass
+        return self._size
 
     def is_empty(self): # O(1)
         """ return True if the queue is empty. """
-        pass
+        if len(self) == 0:
+            return True
+        return False
 
     def __str__(self):  # O(n) or O(1) up to you, not graded
-        pass
+        res = ''
+        for i in range(len(self)):
+            res += self._data[(self._front + i) % len(self._data)] + ' '
+        return res
 
 
 ##############TEST CODES#################
