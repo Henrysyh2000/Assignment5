@@ -8,22 +8,43 @@ class LeakyStack():
 
     def push(self, e):  # O(1)
         """ push element e into top of the stack, with leaky feature. """
-        pass
+        self._size += 1
+        if self._size > len(self._data):
+            self._size -= 1
+            self._data[self._top] = e
+            self._top += 1
+            self._top %= len(self._data)
+
+        else:
+            self._data[self._size - 1] = e
+        
 
     def pop(self):      # O(1)
         """ pop and return the element stored at top of the stack. """
-        pass
-
+        if self.is_empty():
+            raise Empty
+        else:
+            loc = (self._top + self._size - 1) % len(self._data)
+            res = self._data[loc]
+            self._data[loc] = None
+            self._size -= 1
+            return res
+        
     def __len__(self):  # O(1)
         """ return the current stack size. """
-        pass
+        return self._size
 
     def is_empty(self): # O(1)
         """ return True if the stack is empty. """
-        pass
+        if len(self) == 0:
+            return True
+        return False
 
     def __str__(self):  # O(n) or O(1) up to you, not graded
-        pass
+        res = ''
+        for i in range(len(self)):
+            res += ' ' + self._data[(self._top + i) % len(self._data)]    
+        return res[::-1]
 
 
 ##############TEST CODES#################
