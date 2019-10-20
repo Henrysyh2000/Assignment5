@@ -15,7 +15,7 @@ class LeakyQueue():
             self._front += 1
             self._front %= len(self._data)
         else:
-            self._data[self._size - 1] = e
+            self._data[(self._front + self._size - 1) % len(self._data)] = e
         
 
     def dequeue(self):      # O(1)

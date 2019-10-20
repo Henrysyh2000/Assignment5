@@ -16,8 +16,8 @@ class LeakyStack():
             self._top %= len(self._data)
             
         else:
-            self._data[self._size - 1] = e
-        print(self._data)
+            self._data[(self._top + self._size - 1) % len(self._data)] = e
+        #print(self._data)
 
     def pop(self):      # O(1)
         """ pop and return the element stored at top of the stack. """
@@ -48,31 +48,40 @@ class LeakyStack():
 
 
 ##############TEST CODES#################
-''' Comment out the test code if you are grading on gradescope.
+''' Comment out the test code if you are grading on gradescope.'''
 def main():
     leakystack = LeakyStack(5)  # Max size = 5 stack.
-    leakystack.push('a')
-    leakystack.push('b')
-    leakystack.push('c')
-    #print(leakystack)   # top of stack --> c b a
-    leakystack.push('d')
+    leakystack.push('q')
+    leakystack.push('w')
     leakystack.push('e')
-    #print(leakystack)  # top of stack --> e d c b a 
-    leakystack.push('f')
+    print(leakystack)   # top of stack --> c b a
+    leakystack.push('r')
+    leakystack.push('t')
+    print(leakystack)  # top of stack --> e d c b a 
+    leakystack.push('y')
     ##################
-    leakystack.push('g')
-    leakystack.push('h')
-    #print(leakystack)
+    leakystack.push('u')
+    leakystack.push('i')
+    print(leakystack)
     ###################
-
-    #print(leakystack)   # top of stack --> f e d c b,   a is gone because it is the oldest.
+    
+    print(leakystack)   # top of stack --> f e d c b,   a is gone because it is the oldest.
     print(leakystack.pop())  # f popped
     print(leakystack.pop())  # e popped
+    
     #######################
     print(leakystack.pop())
+    leakystack.push('a')
+    leakystack.push('b')
+    leakystack.push('c')    
+    leakystack.push('d')
+    print(leakystack)
+    print(leakystack.pop())
+
+
     #######################
+    
     print(leakystack)   # top of stack --> d c b
 
 if __name__ == '__main__':
     main()
-'''
