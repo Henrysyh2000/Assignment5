@@ -47,7 +47,7 @@ class LeakyQueue():
 
 
 ##############TEST CODES#################
-''' Comment out the test code if you are grading on gradescope.'''
+''' Comment out the test code if you are grading on gradescope.
 def main():
     leakyqueue = LeakyQueue(5)  # Max size = 5 queue.
     leakyqueue.enqueue('a')
@@ -64,7 +64,9 @@ def main():
     print(leakyqueue.dequeue())  # d dequeued
     print(leakyqueue.dequeue())  # e dequeued
     print(leakyqueue.dequeue())  # f dequeued
+    print(leakyqueue.dequeue())
     print(leakyqueue)   # front of queue --> g h
 
 if __name__ == '__main__':
     main()
+'''
